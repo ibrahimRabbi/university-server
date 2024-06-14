@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose";
 import envData from "../../config/config";
-import genereteRoll from "../../utility/genereteRoll";
+import genereteRoll, { previous } from "../../utility/genereteRoll";
 import { StudentInterface } from "../students/student.interface";
 import { studentModel } from "../students/student.model";
 import { UserInterface } from "./user.interface";
@@ -13,20 +13,12 @@ export const studentService = async (studentData: StudentInterface) => {
     const findSemeter = await semesterModel.findById({ _id: studentData.semesterId })
 
     let generetedRoll = genereteRoll(findSemeter)
-    const allData = await userModel.findOne({ studentRoll: generetedRoll })
     
-
-    if (allData) {
-        generetedRoll = (parseInt(generetedRoll) + 1).toString()     
-    } else {
-        generetedRoll = generetedRoll
-   }
-
     const user: Partial<UserInterface> = {
         password: studentData.password || envData.defaultPass,
         email: studentData.email,
         role: 'student',
-        studentRoll: generetedRoll ,
+        studentRoll: await generetedRoll ,
     }
     const inserting = await userModel.create(user)
 
