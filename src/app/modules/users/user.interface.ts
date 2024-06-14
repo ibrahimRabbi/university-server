@@ -1,9 +1,9 @@
 
 export type UserInterface = {
-    slugId: string,
+    studentRoll: string,
     password?: string,
-    email:string,
+    email: string,
     role: 'student' | 'faculty' | 'admin',
     status: 'pendding' | 'blocked',
-    isDeleted:boolean
+    isDeleted: boolean,
 }

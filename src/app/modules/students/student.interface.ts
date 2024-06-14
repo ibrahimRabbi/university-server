@@ -8,7 +8,7 @@ export type NameInterface = {
 export type StudentInterface = {
     password?: string,
     userId: Types.ObjectId,
-    slugId:string,
+    semesterId: Types.ObjectId
     name:NameInterface,
     age: number,
     present_address: string,
