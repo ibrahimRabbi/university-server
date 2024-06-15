@@ -9,7 +9,7 @@ const nameSchema = new Schema<NameInterface>({
 const studentSchema = new Schema<StudentInterface>({
     password: { type: String, trim: true },
     userId: { type: Schema.Types.ObjectId ,required:true,unique:true},
-    semesterId:{type:Schema.Types.ObjectId,required:true,unique:true},
+    semesterId: { type: Schema.Types.ObjectId, required: true },
     name: { type: nameSchema, required: true },
     age: { type: Number, required: true,max:40 },
     present_address: { type: String, required: true },

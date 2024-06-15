@@ -9,17 +9,24 @@ const genereteRoll = async (semeterData: SemesterInterface) => {
 
   const allData = await userModel.findOne({ role: 'student' }).sort({ createdAt: -1 })
 
-
   let previousRoll = allData?.studentRoll.substring(6)
-
-  const initial = previousRoll || (0).toString().padStart(4, '0')
-  const incriment = parseInt(initial) + 1
-
-  const currentId = incriment.toString().padStart(4, '0')
+  const previousSemesterCode = allData?.studentRoll.substring(4, 6)
+  let currentSemesterCode = semeterData.code
   const year = semeterData.year.getFullYear()
-  const semeterCode = semeterData.code
+   
+  let initial = previousRoll || (0).toString()
+  
 
-  return `${year}${semeterCode}${currentId}`
+  if (previousSemesterCode !== currentSemesterCode) {
+     initial = (0).toString()
+  }  
+
+  const incriment = parseInt(initial) + 1
+  const currentId = incriment.toString().padStart(4, '0')
+ 
+  return `${year}${currentSemesterCode}${currentId}`
+
+  
 };
 
 export default genereteRoll;
