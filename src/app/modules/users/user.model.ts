@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 
 export const userSchema = new Schema<UserInterface>(
     {
-        studentRoll: { type: String,required:true},
+        studentRoll: { type: String,required:true,unique:true},
         password: { type: String, trim: true },
         email:{type:String,required:true,unique:true},
         role: { type: String, required: true, enum: ['student', 'faculty', 'admin'] },

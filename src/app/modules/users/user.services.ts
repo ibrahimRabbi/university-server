@@ -1,6 +1,6 @@
-import { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 import envData from "../../config/config";
-import genereteRoll, { previous } from "../../utility/genereteRoll";
+import genereteRoll from "../../utility/genereteRoll";
 import { StudentInterface } from "../students/student.interface";
 import { studentModel } from "../students/student.model";
 import { UserInterface } from "./user.interface";
@@ -10,23 +10,48 @@ import { semesterModel } from "../semester/semester.model";
 
 export const studentService = async (studentData: StudentInterface) => {
 
+    const session = await mongoose.startSession()
     const findSemeter = await semesterModel.findById({ _id: studentData.semesterId })
-
-    let generetedRoll = genereteRoll(findSemeter)
-    
+    const generetedRoll = genereteRoll(findSemeter)
     const user: Partial<UserInterface> = {
         password: studentData.password || envData.defaultPass,
         email: studentData.email,
         role: 'student',
-        studentRoll: await generetedRoll ,
+        studentRoll: await generetedRoll,
     }
-    const inserting = await userModel.create(user)
-
-    if (inserting.role) {
-        studentData.userId = inserting._id
 
 
-        const insetStudent = await studentModel.create(studentData)
+
+    try {
+        session.startTransaction()
+
+        const insertingUser = await userModel.create([user], { session })
+        if (!insertingUser.length) {
+            throw new Error('user cant created successfully')
+        }
+
+
+
+        studentData.userId = insertingUser[0]._id
+        studentData.roll = await generetedRoll
+
+
+        const insetStudent = await studentModel.create([studentData], { session })
+        if (!insetStudent.length) {
+            throw new Error('student cant create successfully')
+        }
+
+        await session.commitTransaction()
+        await session.endSession()
         return insetStudent
+
+    } catch (err: any) {
+        return err
     }
+
+}
+
+export const getAlluserService = async () => {
+    const finding = await userModel.find()
+    return finding
 }
