@@ -9,7 +9,7 @@ export type StudentInterface = {
     password?: string,
     userId: Types.ObjectId,
     semesterId: Types.ObjectId,
-    roll:string,
+    studentRoll:string,
     name:NameInterface,
     age: number,
     present_address: string,

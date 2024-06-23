@@ -16,7 +16,6 @@ app.use(cors())
 app.use(express.json())
 
 //routes
-
 app.use('/api/user', route)
 app.use('/api/semester', semeterRoute)
 app.use('/api/student',StudentRoute)

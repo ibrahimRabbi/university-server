@@ -8,6 +8,8 @@ import { userModel } from "./user.model";
 import { semesterModel } from "../semester/semester.model";
 
 
+
+//create user and student API
 export const studentService = async (studentData: StudentInterface) => {
 
     const session = await mongoose.startSession()
@@ -33,7 +35,7 @@ export const studentService = async (studentData: StudentInterface) => {
 
 
         studentData.userId = insertingUser[0]._id
-        studentData.roll = await generetedRoll
+        studentData.studentRoll = await generetedRoll
 
 
         const insetStudent = await studentModel.create([studentData], { session })
@@ -51,6 +53,8 @@ export const studentService = async (studentData: StudentInterface) => {
 
 }
 
+
+//get all user
 export const getAlluserService = async () => {
     const finding = await userModel.find()
     return finding
