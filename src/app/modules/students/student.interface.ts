@@ -17,5 +17,6 @@ export type StudentInterface = {
     contact: string,
     email:string,
     subject: string,
-    blood: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'AB+'
+    blood: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'AB+',
+    isDeleted:boolean
 }

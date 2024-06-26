@@ -18,7 +18,8 @@ const studentSchema = new Schema<StudentInterface>({
     contact: { type: String, required: true, trim: true, maxlength: 11 },
     email: { type: String, required: true, unique: true, trim: true },
     subject: { type: String, required: true },
-    blood: { type: String, enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'AB+'], required: true }
+    blood: { type: String, enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'AB+'], required: true },
+    isDeleted: { type: Boolean, default: false }
 })
 
 export const studentModel = model<StudentInterface>('students', studentSchema)

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { deleteStudentService, getAllStudentService } from "./student.services";
+import { deleteStudentService, getAllStudentService, updateStudentService } from "./student.services";
 
 
 
@@ -24,5 +24,18 @@ export const deleteStudent = async (req: Request, res: Response, next: NextFunct
     }
     
 }
+
+//update document
+export const updateStudent = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const roll = req.params.roll
+        const update = await updateStudentService(roll, req.body)
+        res.status(200).json({ status: true, data: update })
+    } catch (err: any) {
+        next(err)
+    }
+
+}
+
 
 

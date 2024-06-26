@@ -48,7 +48,9 @@ export const studentService = async (studentData: StudentInterface) => {
         return insetStudent
 
     } catch (err: any) {
-        return err
+        await session.abortTransaction()
+        await session.endSession()
+        throw new Error(err)
     }
 
 }
