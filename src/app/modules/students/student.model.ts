@@ -20,6 +20,6 @@ const studentSchema = new Schema<StudentInterface>({
     subject: { type: String, required: true },
     blood: { type: String, enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'AB+'], required: true },
     isDeleted: { type: Boolean, default: false }
-})
+},{timestamps:true})
 
 export const studentModel = model<StudentInterface>('students', studentSchema)

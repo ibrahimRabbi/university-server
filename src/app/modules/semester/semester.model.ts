@@ -49,7 +49,7 @@ semesterSchema.pre("save", function (next) {
 //     prac2(semesterObj, this.name )
 })
 
-export const semesterModel = model<SemesterInterface>('semester', semesterSchema)
+export const semesterModel = model<SemesterInterface>('semesters', semesterSchema)
 
 
 

@@ -5,8 +5,10 @@ import { deleteStudentService, getAllStudentService, updateStudentService } from
 
 //get all student with included referencing feild
 export const getallStudents = async (req: Request, res: Response, next: NextFunction) => {
+    const query = req.query
+     
     try {
-        const getData = await getAllStudentService()
+        const getData = await getAllStudentService(query)
         res.status(200).json({ status: true, data: getData })
     } catch (err: any) {
         next(err)

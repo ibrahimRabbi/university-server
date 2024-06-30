@@ -7,6 +7,8 @@ import { globalErrorHandle } from './app/middleware/globalErrMiddle';
 import notFounds from './app/middleware/notFound';
 import { semeterRoute } from './app/modules/semester/semester.route';
 import { StudentRoute } from './app/modules/students/student.route';
+import { courseRoute } from './app/modules/course/course.route';
+import { registerdSemesterRoute } from './app/modules/registerdCourse/registerdSemester.route';
 
  
 
@@ -18,8 +20,9 @@ app.use(express.json())
 //routes
 app.use('/api/user', route)
 app.use('/api/semester', semeterRoute)
-app.use('/api/student',StudentRoute)
-
+app.use('/api/student', StudentRoute)
+app.use('/api/course',courseRoute)
+app.use('/api/regesterd',registerdSemesterRoute)
 
 //error handle middleware
 app.use(globalErrorHandle)
