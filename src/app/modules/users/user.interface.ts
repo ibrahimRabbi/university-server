@@ -1,9 +1,9 @@
 
 export type UserInterface = {
-    studentRoll: string,
-    password?: string,
-    email: string,
+    rollId: string,
     role: 'student' | 'faculty' | 'admin',
-    status: 'pendding' | 'blocked',
+    email: string,
+    password?: string,
+    status: 'in-progress' | 'blocked',
     isDeleted: boolean,
 }

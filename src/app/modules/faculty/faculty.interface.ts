@@ -1,22 +1,22 @@
 import { Types } from "mongoose"
 
-export type NameInterface = {
+ 
+
+export type FacultyNameInterface = {
     first: string,
     last: string
 }
 
-export type StudentInterface = {
+export type FacultyInterface = {
     password?: string,
     userId: Types.ObjectId,
-    semesterId: Types.ObjectId,
-    rollId:string,
-    name:NameInterface,
+    rollId: string,
+    name: FacultyInterface,
     age: number,
     present_address: string,
     permanent_address: string,
     contact: string,
-    email:string,
-    subject: string,
+    email: string,
     blood: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'AB+',
-    isDeleted:boolean
+    isDeleted: boolean
 }

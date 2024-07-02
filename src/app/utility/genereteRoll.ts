@@ -5,15 +5,14 @@ import { userModel } from "../modules/users/user.model";
 
 
 
-const genereteRoll = async (semeterData: SemesterInterface) => {
+const genereteRoll = async (semeterData: SemesterInterface | any) => {
 
   const allData = await userModel.findOne({ role: 'student' }).sort({ createdAt: -1 })
 
-  let previousRoll = allData?.studentRoll.substring(6)
-  const previousSemesterCode = allData?.studentRoll.substring(4, 6)
+  let previousRoll = allData?.rollId.substring(6)
+  const previousSemesterCode = allData?.rollId.substring(4, 6)
   let currentSemesterCode = semeterData.code
   const year = semeterData.year.getFullYear()
-   
   let initial = previousRoll || (0).toString()
   
 

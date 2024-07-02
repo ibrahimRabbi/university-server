@@ -5,11 +5,11 @@ import bcrypt from 'bcrypt'
 
 export const userSchema = new Schema<UserInterface>(
     {
-        studentRoll: { type: String,required:true,unique:true},
-        password: { type: String, trim: true },
-        email:{type:String,required:true,unique:true},
+        rollId: { type: String, required: true, unique: true },
         role: { type: String, required: true, enum: ['student', 'faculty', 'admin'] },
-        status: { type: String, enum: ['pendding', 'blocked'], default:'pendding' },
+        email: { type: String, required: true, unique: true },
+        password: { type: String, trim: true },
+        status: { type: String, enum: ['in-progress', 'blocked'], default:'in-progress' },
         isDeleted: { type: Boolean, default: false }
     },
     { timestamps: true })
