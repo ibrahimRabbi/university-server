@@ -6,7 +6,8 @@ env.config({ path: path.join(process.cwd(), '.env') })
 const envData = {
     databaseUrl: process.env.DATABASE_URL,
     port: process.env.PORT,
-    defaultPass: process.env.DEFAULT_PASS
+    defaultPass: process.env.DEFAULT_PASS,
+    secretKey: process.env.SECRET_KEY
 }
 
 export default envData

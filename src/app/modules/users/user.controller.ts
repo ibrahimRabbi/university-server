@@ -28,15 +28,13 @@ export const createFaculty = async (req: Request, res: Response, next: NextFunct
 
 
 
-
-
-
-
-
-
-
-export const getAlluserController = async (req:Request,res:Response,next:NextFunction) => {
+export const getAlluserController = async (req: Request, res: Response, next: NextFunction) => {
+     
     try {
+        if (req.user.role !== 'admin') {
+            throw new Error('unauthorized access user')
+        }
+
         const finded = await getAlluserService()
         res.status(200).json({ success: true, data: finded })
     } catch (err: any) {

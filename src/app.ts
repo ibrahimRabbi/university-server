@@ -9,6 +9,7 @@ import { semeterRoute } from './app/modules/semester/semester.route';
 import { StudentRoute } from './app/modules/students/student.route';
 import { courseRoute } from './app/modules/course/course.route';
 import { registerdSemesterRoute } from './app/modules/registerdCourse/registerdSemester.route';
+import { authRoute } from './app/modules/Authentication/auth.route';
 
  
 
@@ -22,7 +23,8 @@ app.use('/api/user', route)
 app.use('/api/semester', semeterRoute)
 app.use('/api/student', StudentRoute)
 app.use('/api/course',courseRoute)
-app.use('/api/regesterd',registerdSemesterRoute)
+app.use('/api/regesterd', registerdSemesterRoute)
+app.use('/api/auth',authRoute)
 
 //error handle middleware
 app.use(globalErrorHandle)
