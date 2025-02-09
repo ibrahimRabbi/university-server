@@ -97,8 +97,6 @@ export const facultyService = async (payload: FacultyInterface) => {
         throw new Error(err)
 }
     
-     
-
     
 
    

@@ -6,8 +6,12 @@ import { deleteStudentService, getAllStudentService, updateStudentService } from
 //get all student with included referencing feild
 export const getallStudents = async (req: Request, res: Response, next: NextFunction) => {
     const query = req.query
+   
      
     try {
+        if (req.user.role !== 'faculty') {
+             throw new Error('unauthorized Access')
+        }
         const getData = await getAllStudentService(query)
         res.status(200).json({ status: true, data: getData })
     } catch (err: any) {

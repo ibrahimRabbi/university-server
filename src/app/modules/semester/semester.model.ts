@@ -22,6 +22,7 @@ semesterSchema.pre("save", function (next) {
         summer: "02",
         fall: "03"
     }
+    
     try {
         if (this.code !== semesterObj[this.name]) {
           throw new Error('wrong credit')

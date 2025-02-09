@@ -12,12 +12,12 @@ import { userModel } from "../users/user.model"
 //get all student with included referencing feild
 export const getAllStudentService = async (query: Record<string, unknown>) => {
 
-console.log(query)
+
     const snapshotofQuery = { ...query }
-    const excludequeries = ["searchTram", 'limit', 'sort','feilds']
+    const excludequeries = ["searchTram", 'limit', 'sort', 'feilds']
     excludequeries.forEach((el) => delete snapshotofQuery[el])
 
-    const searchFeild = ["name.first", "name.last", "email"]
+
     let searchTram = '';
     let sort = '-createdAt';
     let selectFeild = '';
@@ -32,9 +32,10 @@ console.log(query)
 
     if (query.feilds) {
         const data = query.feilds as string
-        selectFeild = data.split(',').join(' ') 
+        selectFeild = data.split(',').join(' ')
     }
 
+    const searchFeild = ["name.first", "name.last", "email"]
     const searchquery = studentModel.find({
         $or: searchFeild.map((feild) => {
             return { [feild]: { $regex: searchTram, $options: 'i' } }
@@ -42,7 +43,9 @@ console.log(query)
     })
 
     const finded = await searchquery.find(snapshotofQuery)
-        .populate('userId').populate('semesterId').sort(sort).limit(1).select(selectFeild)
+    // .populate('userId').populate('semesterId').sort(sort).limit(1).select(selectFeild)
+
+
     return finded
 }
 
@@ -110,7 +113,7 @@ export const updateStudentService = async (roll: string, data: any) => {
             }
 
         }
-        console.log(updatedDoc)
+
         const updating = await studentModel.findOneAndUpdate({ studentRoll: roll }, updatedDoc, { new: true, session: session })
 
 

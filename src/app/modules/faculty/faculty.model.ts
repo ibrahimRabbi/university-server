@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import { FacultyInterface, FacultyNameInterface } from "./faculty.interface";
- 
+
 
 const nameSchema = new Schema<FacultyNameInterface>({
     first: { type: String, required: true, trim: true },
@@ -10,7 +10,7 @@ const nameSchema = new Schema<FacultyNameInterface>({
 const facultySchema = new Schema<FacultyInterface>({
     password: { type: String, trim: true },
     userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
-    rollId:{type:String,required:true},
+    rollId: { type: String, required: true },
     name: { type: nameSchema, required: true },
     age: { type: Number, required: true, max: 40 },
     present_address: { type: String, required: true },
